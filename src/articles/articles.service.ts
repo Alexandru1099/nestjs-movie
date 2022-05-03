@@ -1,19 +1,19 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { CreateArticlesDto } from "./articles.dto";
-import { Articles } from "./article.entity";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateArticlesDto } from './articles.dto';
+import { Articles } from './article.entity';
 
 @Injectable()
-export class RolesService {
+export class ArticlesService {
   @InjectRepository(Articles)
   private readonly repository: Repository<Articles>;
 
-  public getRoles(id: number): Promise<Articles> {
+  public getArticles(id: number): Promise<Articles> {
     return this.repository.findOne(id);
   }
 
-  public createRoles(body: CreateArticlesDto): Promise<Articles> {
+  public createArticles(body: CreateArticlesDto): Promise<Articles> {
     const articles: Articles = new Articles();
 
     articles.name = body.name;
