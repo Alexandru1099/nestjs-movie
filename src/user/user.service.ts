@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { takeLast } from 'rxjs';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './user.dto';
 import { User } from './user.entity';
@@ -20,5 +21,15 @@ export class UserService {
     user.email = body.email;
 
     return this.repository.save(user);
+  }
+
+  public deleteUser(id: number): void {
+    this.user = this.user.filter((user) => user.id !== id);
+  }
+
+  public updateUser(id: number, name: string) {
+    const user = this.getUser(id);
+    user.name = name;
+    return user;
   }
 }

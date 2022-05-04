@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  Inject,
   Param,
   ParseIntPipe,
   Post,
@@ -29,4 +28,18 @@ export class UserController {
   public createUser(@Body() body: CreateUserDto): Promise<User> {
     return this.service.createUser(body);
   }
+
+  @Delete(':id')
+  public deleteUser(@Param('id') id: number): void {
+    return this.userService.deleteUser(id);
+  }
+
+  @Patch(':id/name')
+  updateName(
+    @Param('id') id: number,
+    @Body('name') name: string,
+    ): User {
+    return this.userService.updateName(id, name);
+  }
+
 }
