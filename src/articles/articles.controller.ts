@@ -39,8 +39,7 @@ export class ArticlesController {
   public updateArticle(
     @Param('id') id: number,
     @Body('name') name: string,
-  ): Promise <Articles> {
+  ): Promise<Articles> {
     return this.articleService.updateArticle(id, name);
   }
-   
 }

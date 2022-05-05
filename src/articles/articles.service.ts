@@ -25,16 +25,15 @@ export class ArticlesService {
   async deleteArticle(id: number): Promise<void> {
     const result = await this.articleRepository.delete(id);
 
-    if(result.affected === 0) {
+    if (result.affected === 0) {
       throw new NotFoundException(`User with id "${id}" not found`);
     }
   }
 
- async updateArticle(id: number, name: string): Promise<Articles> {
-   const article = await this.getArticles(id);
-   article.name = name;
-   await this.articleRepository.save(article);
-   return article;
- }
-
+  async updateArticle(id: number, name: string): Promise<Articles> {
+    const article = await this.getArticles(id);
+    article.name = name;
+    await this.articleRepository.save(article);
+    return article;
+  }
 }
