@@ -8,37 +8,45 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const typeorm_2 = require("typeorm");
-const user_entity_1 = require("./user.entity");
+const user_repository_1 = require("./user.repository");
 let UserService = class UserService {
-    getUser(id) {
-        return this.repository.findOne(id);
+    constructor(userRepository) {
+        this.userRepository = userRepository;
     }
-    createUser(body) {
-        const user = new user_entity_1.User();
-        user.name = body.name;
-        user.email = body.email;
-        return this.repository.save(user);
+    async getUser(id) {
+        const found = this.userRepository.findOne(id);
+        if (!found) {
+            throw new common_1.NotFoundException(`User with id "${id}" not found`);
+        }
+        return found;
     }
-    deleteUser(id) {
-        this.user = this.user.filter((user) => user.id !== id);
+    async createUser(body) {
+        return this.userRepository.createUser(body);
     }
-    updateUser(id, name) {
-        const user = this.getUser(id);
+    async deleteUser(id) {
+        const result = await this.userRepository.delete(id);
+        if (result.affected === 0) {
+            throw new common_1.NotFoundException(`User with id "${id}" not found`);
+        }
+    }
+    async updateUser(id, name) {
+        const user = await this.getUser(id);
         user.name = name;
+        await this.userRepository.save(user);
         return user;
     }
 };
-__decorate([
-    (0, typeorm_1.InjectRepository)(user_entity_1.User),
-    __metadata("design:type", typeorm_2.Repository)
-], UserService.prototype, "repository", void 0);
 UserService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(user_repository_1.UsersRepository)),
+    __metadata("design:paramtypes", [user_repository_1.UsersRepository])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

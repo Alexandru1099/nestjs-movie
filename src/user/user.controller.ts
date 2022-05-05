@@ -18,7 +18,6 @@ export class UserController {
   constructor(
     @InjectRepository(UserService)
     private userService: UserService,
-    private readonly service: UserService,
   ) {}
 
   @Get(':id')
@@ -40,9 +39,7 @@ export class UserController {
   public updateUser(
     @Param('id') id: number,
     @Body('name') name: string,
-  ): Promise <User> {
+  ): Promise<User> {
     return this.userService.updateUser(id, name);
   }
-
-
 }

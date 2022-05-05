@@ -19,15 +19,20 @@ const typeorm_1 = require("@nestjs/typeorm");
 const articles_dto_1 = require("./articles.dto");
 const articles_service_1 = require("./articles.service");
 let ArticlesController = class ArticlesController {
-    constructor(articleService, service) {
+    constructor(articleService) {
         this.articleService = articleService;
-        this.service = service;
     }
     getArticle(id) {
-        return this.service.getArticles(id);
+        return this.articleService.getArticles(id);
     }
     createArticle(body) {
-        return this.service.createArticles(body);
+        return this.articleService.createArticles(body);
+    }
+    deleteArticle(id) {
+        return this.articleService.deleteArticle(id);
+    }
+    updateArticle(id, name) {
+        return this.articleService.updateArticle(id, name);
     }
 };
 __decorate([
@@ -46,11 +51,27 @@ __decorate([
     __metadata("design:paramtypes", [articles_dto_1.CreateArticlesDto]),
     __metadata("design:returntype", Promise)
 ], ArticlesController.prototype, "createArticle", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    openapi.ApiResponse({ status: 200 }),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ArticlesController.prototype, "deleteArticle", null);
+__decorate([
+    (0, common_1.Patch)(':id/name'),
+    openapi.ApiResponse({ status: 200, type: require("./article.entity").Articles }),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('name')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String]),
+    __metadata("design:returntype", Promise)
+], ArticlesController.prototype, "updateArticle", null);
 ArticlesController = __decorate([
     (0, common_1.Controller)('article'),
     __param(0, (0, typeorm_1.InjectRepository)(articles_service_1.ArticlesService)),
-    __metadata("design:paramtypes", [articles_service_1.ArticlesService,
-        articles_service_1.ArticlesService])
+    __metadata("design:paramtypes", [articles_service_1.ArticlesService])
 ], ArticlesController);
 exports.ArticlesController = ArticlesController;
 //# sourceMappingURL=articles.controller.js.map
