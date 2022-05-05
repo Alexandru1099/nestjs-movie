@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -21,25 +23,26 @@ export class UserController {
 
   @Get(':id')
   public getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
-    return this.service.getUser(id);
+    return this.userService.getUser(id);
   }
 
   @Post()
   public createUser(@Body() body: CreateUserDto): Promise<User> {
-    return this.service.createUser(body);
+    return this.userService.createUser(body);
   }
 
   @Delete(':id')
-  public deleteUser(@Param('id') id: number): void {
+  public deleteUser(@Param('id') id: number): Promise<void> {
     return this.userService.deleteUser(id);
   }
 
   @Patch(':id/name')
-  updateName(
+  public updateUser(
     @Param('id') id: number,
     @Body('name') name: string,
-    ): User {
-    return this.userService.updateName(id, name);
+  ): Promise <User> {
+    return this.userService.updateUser(id, name);
   }
+
 
 }

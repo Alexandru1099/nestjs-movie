@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -16,16 +18,29 @@ export class ArticlesController {
   constructor(
     @InjectRepository(ArticlesService)
     private articleService: ArticlesService,
-    private readonly service: ArticlesService,
   ) {}
 
   @Get(':id')
   public getArticle(@Param('id', ParseIntPipe) id: number): Promise<Articles> {
-    return this.service.getArticles(id);
+    return this.articleService.getArticles(id);
   }
 
   @Post()
   public createArticle(@Body() body: CreateArticlesDto): Promise<Articles> {
-    return this.service.createArticles(body);
+    return this.articleService.createArticles(body);
   }
+
+  @Delete(':id')
+  public deleteArticle(@Param('id') id: number): Promise<void> {
+    return this.articleService.deleteArticle(id);
+  }
+
+  @Patch(':id/name')
+  public updateArticle(
+    @Param('id') id: number,
+    @Body('name') name: string,
+  ): Promise <Articles> {
+    return this.articleService.updateArticle(id, name);
+  }
+   
 }

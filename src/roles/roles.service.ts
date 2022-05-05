@@ -1,23 +1,41 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { RolesRepository } from "./role.repository";
 import { CreateRolesDto } from "./roles.dto";
 import { Roles } from "./roles.entity";
 
 @Injectable()
 export class RolesService {
   @InjectRepository(Roles)
-  private readonly repository: Repository<Roles>;
+  private rolesRepository: RolesRepository;
 
-  public getRoles(id: number): Promise<Roles> {
-    return this.repository.findOne(id);
+  async createRoles(body: CreateRolesDto): Promise<Roles> {
+    return this.rolesRepository.save(body);
   }
 
-  public createRoles(body: CreateRolesDto): Promise<Roles> {
-    const roles: Roles = new Roles();
+  async getRoles(id: number): Promise<Roles> {
+    const found = this.rolesRepository.findOne(id);
 
-    roles.name = body.name;
-
-    return this.repository.save(roles);
+    if(!found) {
+      throw new NotFoundException(`This role with id "${id}" not found`);
+    }
+    return this.rolesRepository.findOne(id);
   }
+
+  async deleteRoles(id: number): Promise<void> {
+    const result = await this.rolesRepository.delete(id);
+
+    if(result.affected === 0){
+      throw new NotFoundException(`This role with id "${id}" not found`)
+    }
+  }
+
+  async updateRoles(id: number, name: string): Promise<Roles> {
+    const role =  await this.getRoles(id);
+    role.name = name;
+    await this.rolesRepository.save(role);
+    return role;
+  }
+
 }
