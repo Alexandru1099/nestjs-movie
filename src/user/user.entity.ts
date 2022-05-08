@@ -17,6 +17,9 @@ export class User {
   @Column({ type: 'varchar' })
   public email: string;
 
+  @Column({ type: 'varchar' })
+  public password: string;
+
   @CreateDateColumn({ type: 'timestamp' })
   public createdAt!: Date;
 

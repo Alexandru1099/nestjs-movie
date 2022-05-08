@@ -27,7 +27,7 @@ export class UserController {
   }
 
   @Post()
-  public createUser(@Body() body: CreateUserDto): Promise<User> {
+  public createUser(@Body() body: CreateUserDto): Promise<void> {
     return this.userService.createUser(body);
   }
 
@@ -40,9 +40,7 @@ export class UserController {
   public updateUser(
     @Param('id') id: number,
     @Body('name') name: string,
-  ): Promise <User> {
+  ): Promise<User> {
     return this.userService.updateUser(id, name);
   }
-
-
 }
