@@ -19,9 +19,8 @@ const typeorm_1 = require("@nestjs/typeorm");
 const user_dto_1 = require("./user.dto");
 const user_service_1 = require("./user.service");
 let UserController = class UserController {
-    constructor(userService, service) {
+    constructor(userService) {
         this.userService = userService;
-        this.service = service;
     }
     getUser(id) {
         return this.userService.getUser(id);
@@ -72,8 +71,7 @@ __decorate([
 UserController = __decorate([
     (0, common_1.Controller)('user'),
     __param(0, (0, typeorm_1.InjectRepository)(user_service_1.UserService)),
-    __metadata("design:paramtypes", [user_service_1.UserService,
-        user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=user.controller.js.map

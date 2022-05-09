@@ -18,7 +18,6 @@ export class UserController {
   constructor(
     @InjectRepository(UserService)
     private userService: UserService,
-    private readonly service: UserService,
   ) {}
 
   @Get(':id')
