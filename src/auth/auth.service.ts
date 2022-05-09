@@ -1,16 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersRepository } from 'src/user/user.repository';
+import { UserService } from 'src/user/user.service';
 import { authCredentialDto } from './auth-credential.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    @InjectRepository(UsersRepository)
-    private userRepository: UsersRepository,
-  ) {}
+  constructor(private userRepository: UserService) {}
 
-  async singUp(body: authCredentialDto): Promise<void> {
+  async singUp(body: authCredentialDto): Promise<any> {
     return this.userRepository.createUser(body);
   }
 }

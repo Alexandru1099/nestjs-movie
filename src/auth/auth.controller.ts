@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('/singup')
+  @Post('signup')
   singUp(@Body() body: authCredentialDto): Promise<void> {
     return this.authService.singUp(body);
   }

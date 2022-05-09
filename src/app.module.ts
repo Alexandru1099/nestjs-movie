@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import ormConfig from '../ormconfig';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import ormConfig from '../ormconfig';
       cache: true,
       isGlobal: true,
     }),
+    UserModule,
     TypeOrmModule.forRoot(ormConfig),
     AuthModule,
   ],

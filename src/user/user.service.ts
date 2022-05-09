@@ -9,8 +9,8 @@ import { UsersRepository } from './user.repository';
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(UsersRepository)
-    private userRepository: UsersRepository,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
   async getUser(id: number): Promise<User> {
     const found = this.userRepository.findOne(id);
@@ -20,8 +20,12 @@ export class UserService {
     return found;
   }
 
-  async createUser(body: CreateUserDto): Promise<void> {
-    return this.userRepository.createUser(body);
+  async createUser(body: CreateUserDto): Promise<User> {
+    return this.userRepository.create({
+      name: 'alex',
+      email: body.email,
+      password: body.password,
+    });
   }
 
   async deleteUser(id: number): Promise<void> {

@@ -4,7 +4,7 @@ export default {
   type: 'postgres',
   database: process.env.DATABASE_NAME,
   password: process.env.DATABASE_PASSWORD,
-  port: parseInt(process.env.DATABASE_PORT),
+  port: parseInt(process.env.DATABASE_PORT) || 5432,
   username: process.env.DATABASE_USERNAME,
   entities: ['dist/**/*{.entity,.index}.js'],
   migrations: ['dist/src/migrations/*.js'],

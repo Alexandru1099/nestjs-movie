@@ -27,7 +27,7 @@ export class UserController {
   }
 
   @Post()
-  public createUser(@Body() body: CreateUserDto): Promise<void> {
+  public createUser(@Body() body: CreateUserDto): Promise<User> {
     return this.userService.createUser(body);
   }
 
