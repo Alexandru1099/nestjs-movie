@@ -4,7 +4,6 @@ import { NotFoundError } from 'rxjs';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './user.dto';
 import { User } from './user.entity';
-import { UsersRepository } from './user.repository';
 
 @Injectable()
 export class UserService {
