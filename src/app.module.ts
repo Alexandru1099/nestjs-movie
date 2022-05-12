@@ -7,6 +7,9 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env.development',
+    }),
     ConfigModule,
     UserModule,
     AuthModule,

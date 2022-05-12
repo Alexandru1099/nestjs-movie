@@ -4,13 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  BaseEntity,
 } from 'typeorm';
 
 @Entity()
-export class User {
-  save(): User | PromiseLike<User> {
-    throw new Error('Method not implemented.');
-  }
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
 

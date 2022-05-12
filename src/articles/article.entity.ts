@@ -5,10 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  BaseEntity,
 } from 'typeorm';
 
 @Entity()
-export class Articles {
+export class Articles extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
 
