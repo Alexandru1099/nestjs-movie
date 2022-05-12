@@ -8,17 +8,13 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(
-    @InjectRepository(UserService)
-    private userService: UserService,
-  ) {}
+  constructor(private userService: UserService) {}
 
   @Get(':id')
   public getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
