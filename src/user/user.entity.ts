@@ -8,6 +8,9 @@ import {
 
 @Entity()
 export class User {
+  save(): User | PromiseLike<User> {
+    throw new Error('Method not implemented.');
+  }
   @PrimaryGeneratedColumn()
   public id!: number;
 
@@ -17,12 +20,12 @@ export class User {
   @Column({ type: 'varchar' })
   public email: string;
 
-  @Column({ type: 'varchar' })
-  public password: string;
-
   @CreateDateColumn({ type: 'timestamp' })
   public createdAt!: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
   public updatedAt!: Date;
+
+  @Column({ type: 'varchar' })
+  public password: string;
 }

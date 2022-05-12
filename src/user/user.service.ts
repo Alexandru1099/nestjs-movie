@@ -19,12 +19,22 @@ export class UserService {
   }
 
   async createUser(body: CreateUserDto): Promise<User> {
-    return this.userRepository.create({
-      name: 'alex',
-      email: body.email,
-      password: body.password,
-    });
+    return this.userRepository
+      .create({
+        name: 'alex',
+        email: body.email,
+        password: body.password,
+      })
+      .save();
   }
+
+  // public createUser(body: CreateUserDto): Promise<User> {
+  //   const user: User = new User();
+  //   user.name = 'alex';
+  //   user.email = body.email;
+  //   user.password = body.password;
+  //   return this.userRepository.save(user);
+  // }
 
   async deleteUser(id: number): Promise<void> {
     const result = await this.userRepository.delete(id);
