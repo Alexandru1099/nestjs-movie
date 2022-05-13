@@ -7,10 +7,12 @@ import { Roles } from './roles.entity';
 @Injectable()
 export class RolesService {
   @InjectRepository(Roles)
-  private rolesRepository: Repository<Roles>;
+  private readonly rolesRepository: Repository<Roles>;
 
   async createRoles(body: CreateRolesDto): Promise<Roles> {
-    return this.rolesRepository.save(body);
+    return this.rolesRepository.save({
+      name: body.name,
+    });
   }
 
   async getRoles(id: number): Promise<Roles> {

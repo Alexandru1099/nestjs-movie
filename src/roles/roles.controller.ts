@@ -17,13 +17,13 @@ export class RolesController {
   constructor(private roleService: RolesService) {}
 
   @Get(':id')
-  async getRole(@Param('id', ParseIntPipe) id: number): Promise<Roles> {
-    return await this.roleService.getRoles(id);
+  async getRole(@Param('id') id: number): Promise<Roles> {
+    return this.roleService.getRoles(id);
   }
 
   @Post()
   async createRole(@Body() body: CreateRolesDto): Promise<Roles> {
-    return await this.roleService.createRoles(body);
+    return this.roleService.createRoles(body);
   }
 
   @Delete(':id')
