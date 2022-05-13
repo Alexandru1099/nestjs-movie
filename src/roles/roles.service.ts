@@ -2,20 +2,20 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRolesDto } from './roles.dto';
-import { Roles } from './roles.entity';
+import { Role } from './roles.entity';
 
 @Injectable()
 export class RolesService {
-  @InjectRepository(Roles)
-  private readonly rolesRepository: Repository<Roles>;
+  @InjectRepository(Role)
+  private rolesRepository: Repository<Role>;
 
-  async createRoles(body: CreateRolesDto): Promise<Roles> {
+  async createRoles(body: CreateRolesDto): Promise<Role> {
     return this.rolesRepository.save({
       name: body.name,
     });
   }
 
-  async getRoles(id: number): Promise<Roles> {
+  async getRoles(id: number): Promise<Role> {
     const found = await this.rolesRepository.findOne(id);
 
     if (!found) {
@@ -32,7 +32,7 @@ export class RolesService {
     }
   }
 
-  async updateRoles(id: number, name: string): Promise<Roles> {
+  async updateRoles(id: number, name: string): Promise<Role> {
     const role = await this.getRoles(id);
     role.name = name;
     await this.rolesRepository.save(role);

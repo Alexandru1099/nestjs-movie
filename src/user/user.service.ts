@@ -27,14 +27,6 @@ export class UserService {
     });
   }
 
-  // public createUser(body: CreateUserDto): Promise<User> {
-  //   const user: User = new User();
-  //   user.name = 'alex';
-  //   user.email = body.email;
-  //   user.password = body.password;
-  //   return this.userRepository.save(user);
-  // }
-
   async deleteUser(id: number): Promise<void> {
     const result = await this.userRepository.delete(id);
 
