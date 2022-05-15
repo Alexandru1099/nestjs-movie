@@ -6,6 +6,9 @@ import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
+  findOne(arg0: { email: string; }) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,

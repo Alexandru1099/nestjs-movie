@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -16,7 +15,7 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @Get('/:id')
+  @Get(':id')
   public getUser(@Param('id') id: number): Promise<User> {
     return this.userService.getUser(id);
   }

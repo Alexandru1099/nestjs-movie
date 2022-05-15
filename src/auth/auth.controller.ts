@@ -7,7 +7,11 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('signup')
-  async singUp(@Body() body: authCredentialDto): Promise<void> {
-    return await this.authService.singUp(body);
+  async signUp(@Body() body: authCredentialDto): Promise<void> {
+    return await this.authService.signUp(body);
   }
+  // @Post('signip')
+  // async signIp(@Body() body: authCredentialDto): Promise<string> {
+  //   return await this.authService.signIn(body);
+  // }
 }
