@@ -4,6 +4,8 @@ import { AuthController } from './auth.controller';
 import { UserModule } from 'src/user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { User } from 'src/user/user.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -14,6 +16,7 @@ import { JwtModule } from '@nestjs/jwt';
         expiresIn: 3600,
       },
     }),
+    TypeOrmModule.forFeature([User]),
     UserModule,
   ],
   providers: [AuthService],
