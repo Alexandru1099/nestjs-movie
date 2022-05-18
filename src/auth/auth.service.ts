@@ -4,6 +4,8 @@ import { authCredentialDto } from './auth-credential.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { jwtPayload } from './jwt-payload.interface';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/user/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -12,6 +14,7 @@ export class AuthService {
     throw new Error('Method not implemented.');
   }
   constructor(
+    @InjectRepository(User)
     private userRepository: UserService,
     private jwtService: JwtService,
   ) {}
@@ -25,8 +28,8 @@ export class AuthService {
     const user = this.userRepository.findOne({ email });
     console.log(user);
     console.log(password);
-    console.log(user);
-    if (user && (await bcrypt.compare(password, user.password))) {
+    console.log(user.password);
+    if (user && (await bcrypt.compare(password, user))) {
       const payload: jwtPayload = { email };
       const accessToken: string = await this.jwtService.sign(payload);
       return { accessToken };
