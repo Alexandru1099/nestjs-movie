@@ -18,6 +18,13 @@ export class UserService {
     }
     return found;
   }
+  async getUserByEmail(email: string): Promise<User> {
+    const found = this.userRepository.findOne(email);
+    if (!found) {
+      throw new NotFoundException(`User with id "${email}" not found`);
+    }
+    return found;
+  }
 
   async createUser(body: CreateUserDto): Promise<User> {
     const name = 'alex';
