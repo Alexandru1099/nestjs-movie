@@ -8,6 +8,7 @@ export class UsersTable1651341944553 implements MigrationInterface {
                 id uuid DEFAULT uuid_generate_v4() NOT NULL,
                 "name" varchar NOT NULL,
                 "email" varchar NOT NULL,
+                "password" varchar NOR NULL,
                 "createdAt" timestamp NOT NULL DEFAULT NOW(),
                 "updatedAt" timestamp NOT NULL DEFAULT NOW()
                  )`);

@@ -14,7 +14,7 @@ export class AuthService {
     throw new Error('Method not implemented.');
   }
   constructor(
-    @InjectRepository(User)
+    // @InjectRepository(User)
     private userRepository: UserService,
     private jwtService: JwtService,
   ) {}
@@ -25,10 +25,7 @@ export class AuthService {
 
   async signIn(body: authCredentialDto): Promise<{ accessToken: string }> {
     const { email, password } = body;
-    const user = await this.userRepository.findOne({ email });
-    console.log(user);
-    console.log(password);
-    console.log(user.password);
+    const user = await this.userRepository.getUserByEmail(email);
     if (user && password === user.password) {
       const payload: jwtPayload = { email };
       const accessToken: string = await this.jwtService.sign(payload);
