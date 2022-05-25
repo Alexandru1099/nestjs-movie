@@ -1,3 +1,4 @@
+import { User } from 'src/user/user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity()
@@ -26,4 +28,7 @@ export class Article extends BaseEntity {
 
   @UpdateDateColumn({ type: 'timestamp' })
   public updatedAt!: Date;
+
+  @ManyToOne((_type) => User, (user) => user.article, { eager: false })
+  user: User[];
 }

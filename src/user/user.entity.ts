@@ -1,3 +1,4 @@
+import { Article } from 'src/articles/article.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -32,4 +34,7 @@ export class User extends BaseEntity {
 
   @Column({ type: 'varchar' })
   public age: string;
+
+  @OneToMany((_type) => Article, (article) => article.user, { eager: true })
+  article: Article[];
 }
