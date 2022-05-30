@@ -31,6 +31,8 @@ export class UserService {
       name,
       email: body.email,
       password: body.password,
+      age: body.age,
+      gender: body.gender,
     });
   }
 

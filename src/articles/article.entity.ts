@@ -29,6 +29,9 @@ export class Article extends BaseEntity {
   @UpdateDateColumn({ type: 'timestamp' })
   public updatedAt!: Date;
 
-  @ManyToOne((_type) => User, (user) => user.article, { eager: false })
-  user: User[];
+  @Column({ type: 'varchar' })
+  public user_id: string;
+
+  // @ManyToOne((_type) => User, (user) => user.article, { eager: false })
+  // user: User[];
 }

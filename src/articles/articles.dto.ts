@@ -15,4 +15,8 @@ export class CreateArticlesDto {
   @IsNotEmpty()
   @MinLength(10, { message: 'context is too short' })
   public context: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public user_id: string;
 }
