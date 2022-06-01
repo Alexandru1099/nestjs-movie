@@ -5,7 +5,7 @@ export class addAgeColumn1653161143872 implements MigrationInterface {
     await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
     await queryRunner.query(`
                                 ALTER TABLE "user" 
-                                ADD COLUMN "age" VARCHAR NOT NULL
+                                ADD COLUMN "age" VARCHAR SET NOT NULL
                              `);
   }
 

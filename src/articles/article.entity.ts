@@ -1,4 +1,4 @@
-import { User } from 'src/user/user.entity';
+import { Users } from 'src/user/user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -32,6 +32,6 @@ export class Article extends BaseEntity {
   @Column({ type: 'varchar' })
   public user_id: string;
 
-  // @ManyToOne((_type) => User, (user) => user.article, { eager: false })
-  // user: User[];
+  @ManyToOne((_type) => Users, (users) => users.article, { eager: false })
+  users: Users[];
 }

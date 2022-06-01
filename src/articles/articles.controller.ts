@@ -21,6 +21,11 @@ export class ArticlesController {
     return this.articleService.getArticles(id);
   }
 
+  @Get()
+  async getAllArticles(): Promise<Article> {
+    return this.articleService.getAllArticle();
+  }
+
   @Post()
   async createArticle(@Body() body: CreateArticlesDto): Promise<Article> {
     return this.articleService.createArticles(body);

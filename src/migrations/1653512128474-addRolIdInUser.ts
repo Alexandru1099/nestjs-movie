@@ -10,6 +10,6 @@ export class addRolIdInUser1653512128474 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`DROP TABLE user`);
+    await queryRunner.query(`DROP TABLE article`);
   }
 }

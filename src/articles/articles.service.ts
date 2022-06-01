@@ -1,12 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { CreateArticlesDto } from './articles.dto';
 import { Article } from './article.entity';
-import { Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 
 @Injectable()
 export class ArticlesService {
   constructor(
+    @InjectConnection()
+    private readonly connection: Connection,
     @InjectRepository(Article)
     private articleRepository: Repository<Article>,
   ) {}
@@ -16,7 +18,14 @@ export class ArticlesService {
       name: body.name,
       title: body.title,
       context: body.context,
+      user_id: body.user_id,
     });
+  }
+  async getAllArticle() {
+    this.articleRepository.find();
+    return this.connection.query(
+      'SELECT * FROM article art INNER JOIN users usr ON art.user_id = usr.id INNER JOIN role rl ON rl.id = usr.rol_id; ',
+    );
   }
 
   async getArticles(id: number): Promise<Article> {

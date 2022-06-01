@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { jwtPayload } from './jwt-payload.interface';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/user/user.entity';
+import { Users } from 'src/user/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +14,7 @@ export class AuthService {
     throw new Error('Method not implemented.');
   }
   constructor(
-    // @InjectRepository(User)
+    @InjectRepository(Users)
     private userRepository: UserService,
     private jwtService: JwtService,
   ) {}
