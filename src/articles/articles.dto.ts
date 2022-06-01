@@ -18,5 +18,5 @@ export class CreateArticlesDto {
 
   @IsString()
   @IsNotEmpty()
-  public user_id: string;
+  public userId: string;
 }

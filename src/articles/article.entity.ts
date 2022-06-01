@@ -7,12 +7,13 @@ import {
   UpdateDateColumn,
   BaseEntity,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity()
 export class Article extends BaseEntity {
   @PrimaryGeneratedColumn()
-  public id!: number;
+  public id: string;
 
   @Column({ type: 'varchar' })
   public name: string;
@@ -24,14 +25,12 @@ export class Article extends BaseEntity {
   public context: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  public createdAt!: Date;
+  public createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  public updatedAt!: Date;
+  public updatedAt: Date;
 
-  @Column({ type: 'varchar' })
-  public user_id: string;
-
+  @JoinColumn()
   @ManyToOne((_type) => Users, (users) => users.article, { eager: false })
-  users: Users[];
+  user: Partial<Users>;
 }

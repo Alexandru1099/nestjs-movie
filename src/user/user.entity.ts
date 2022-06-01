@@ -35,6 +35,6 @@ export class Users extends BaseEntity {
   @Column({ type: 'varchar' })
   public age: string;
 
-  @OneToMany((_type) => Article, (article) => article.users, { eager: true })
+  @OneToMany((_type) => Article, (article) => article.user, { eager: true })
   article: Article[];
 }

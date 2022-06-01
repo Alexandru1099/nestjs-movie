@@ -5,7 +5,7 @@ export class addForeignKeyArticle1653512787520 implements MigrationInterface {
     await queryRunner.query(`
 
                         ALTER TABLE "article"
-                        ADD CONSTRAINT "fk_artciles_user" FOREIGN KEY (user_id) REFERENCES "user" (id);
+                        ADD CONSTRAINT "fk_artciles_user" FOREIGN KEY (user_id) REFERENCES "users" (id);
                                          `);
   }
 

@@ -3,6 +3,7 @@ import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { CreateArticlesDto } from './articles.dto';
 import { Article } from './article.entity';
 import { Connection, Repository } from 'typeorm';
+import { Role } from 'src/roles/roles.entity';
 
 @Injectable()
 export class ArticlesService {
@@ -18,11 +19,18 @@ export class ArticlesService {
       name: body.name,
       title: body.title,
       context: body.context,
-      user_id: body.user_id,
-    });
+      user: {
+        id: body.userId,
+      },
+    } as any);
   }
   async getAllArticle() {
-    this.articleRepository.find();
+    // this.articleRepository.find({
+    //   relations: ['users'],
+    //   where: {
+    //     id: Role.id,
+    //   },
+    // });
     return this.connection.query(
       'SELECT * FROM article art INNER JOIN users usr ON art.user_id = usr.id INNER JOIN role rl ON rl.id = usr.rol_id; ',
     );
