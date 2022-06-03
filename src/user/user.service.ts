@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Role } from 'src/roles/roles.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './user.dto';
 import { Users } from './user.entity';
@@ -10,6 +11,7 @@ export class UserService {
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
   ) {}
+
   async getUser(id: number): Promise<Users> {
     const found = this.userRepository.findOne(id);
     if (!found) {
@@ -17,6 +19,7 @@ export class UserService {
     }
     return found;
   }
+
   async getUserByEmail(email: string): Promise<Users> {
     const found = this.userRepository.findOne({ email });
     if (!found) {

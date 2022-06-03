@@ -4,6 +4,7 @@ import { CreateArticlesDto } from './articles.dto';
 import { Article } from './article.entity';
 import { Connection, Repository } from 'typeorm';
 import { Role } from 'src/roles/roles.entity';
+import { Users } from 'src/user/user.entity';
 
 @Injectable()
 export class ArticlesService {
@@ -25,12 +26,14 @@ export class ArticlesService {
     } as any);
   }
   async getAllArticle() {
-    // this.articleRepository.find({
-    //   relations: ['users'],
-    //   where: {
-    //     id: Role.id,
-    //   },
-    // });
+    // const filterArticle = await this.articleRepository
+    //   .createQueryBuilder()
+    //   .select()
+    //   .from(Users, 'users')
+    //   .addFrom(Role, 'role')
+    //   .andWhere('users.rol_id = role.id')
+    //   .getMany();
+    // return filterArticle;
     return this.connection.query(
       'SELECT * FROM article art INNER JOIN users usr ON art.user_id = usr.id INNER JOIN role rl ON rl.id = usr.rol_id; ',
     );
