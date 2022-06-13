@@ -3,8 +3,6 @@ import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { CreateArticlesDto } from './articles.dto';
 import { Article } from './article.entity';
 import { Connection, Repository } from 'typeorm';
-import { Role } from 'src/roles/roles.entity';
-import { Users } from 'src/user/user.entity';
 
 @Injectable()
 export class ArticlesService {
@@ -39,7 +37,7 @@ export class ArticlesService {
     );
   }
 
-  async getArticles(id: number): Promise<Article> {
+  async getArticle(id: number): Promise<Article> {
     const found = await this.articleRepository.findOne(id);
     if (!found) {
       throw new NotFoundException(`This role with id "${id}" not found`);
@@ -56,7 +54,7 @@ export class ArticlesService {
   }
 
   async updateArticle(id: number, name: string): Promise<Article> {
-    const article = await this.getArticles(id);
+    const article = await this.getArticle(id);
     article.name = name;
     await this.articleRepository.save(article);
     return article;

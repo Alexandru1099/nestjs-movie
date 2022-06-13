@@ -11,6 +11,7 @@ import {
 import { CreateArticlesDto } from './articles.dto';
 import { Article } from './article.entity';
 import { ArticlesService } from './articles.service';
+import { UUIDVersion } from 'class-validator';
 
 @Controller('article')
 export class ArticlesController {
@@ -18,7 +19,7 @@ export class ArticlesController {
 
   @Get(':id')
   async getArticle(@Param('id', ParseIntPipe) id: number): Promise<Article> {
-    return this.articleService.getArticles(id);
+    return this.articleService.getArticle(id);
   }
 
   @Get()

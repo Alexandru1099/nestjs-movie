@@ -1,4 +1,4 @@
-import { Article } from 'src/articles/article.entity';
+import { Article } from '../articles/article.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
