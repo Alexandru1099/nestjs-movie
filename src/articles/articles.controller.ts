@@ -11,7 +11,6 @@ import {
 import { CreateArticlesDto } from './articles.dto';
 import { Article } from './article.entity';
 import { ArticlesService } from './articles.service';
-import { UUIDVersion } from 'class-validator';
 
 @Controller('article')
 export class ArticlesController {

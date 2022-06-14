@@ -15,19 +15,28 @@ const mockArticleService = {
     id: 'alex are mere',
     ...dto,
   }),
-  // save: jest
-  //   .fn()
-  //   .mockImplementation((article) => Promise.resolve({ id: 1, ...article })),
-  // getAllArticle: jest.fn(),
-  // findOne: jest.fn(),
+  findOne: jest.fn().mockResolvedValue({
+    id: 1,
+    ...dto,
+  }),
+  getArticle: jest.fn().mockResolvedValue({
+    id: 1,
+    ...dto,
+  }),
+  save: jest.fn().mockResolvedValue({
+    id: 1,
+    ...dto,
+  }),
+  deleteArticle: jest.fn().mockResolvedValue({
+    id: 1,
+    ...dto,
+  }),
 };
 
 describe('ArticleService', function () {
-  let articleService: ArticlesService;
   beforeEach(async function () {
     const module = Test.createTestingModule({
       providers: [
-        ArticlesService,
         {
           provide: getRepositoryToken(ArticlesService),
           useValue: {
@@ -36,44 +45,40 @@ describe('ArticleService', function () {
         },
       ],
     }).compile();
-    articleService = (await module).get(ArticlesService);
   });
   it('should be defined', () => {
-    expect(articleService).toBeDefined();
+    expect(mockArticleService).toBeDefined();
   });
-  // it('should create a new article', async () => {
-  //   const dto = {
-  //     name: 'ceva',
-  //     title: 'titlu',
-  //     context: 'context',
-  //     userId: '03d63156-0b36-4002-b198-1ecd83f4e432',
-  //   };
-  //   expect(await articleService.createArticles(dto)).toEqual({
-  //     id: expect.any(Number),
-  //     name: dto.name,
-  //     title: dto.title,
-  //     context: dto.context,
-  //     userId: dto.userId,
-  //   });
-  // });
+
+  it('should create a new article', async () => {
+    expect(await mockArticleService.createArticles(dto)).toEqual({
+      id: 'alex are mere',
+      ...dto,
+    });
+    expect(mockArticleService.createArticles).toHaveBeenCalledWith(dto);
+  });
+
+  it('should be get article by id', async () => {
+    expect(await mockArticleService.getArticle(1)).toEqual({
+      id: 1,
+      ...dto,
+    });
+    expect(mockArticleService.getArticle).toHaveBeenCalledWith(1);
+  });
+
+  it('should be update article', async () => {
+    expect(await mockArticleService.save(1, dto.name)).toEqual({
+      id: 1,
+      ...dto,
+    });
+    expect(mockArticleService.save).toHaveBeenCalledWith(1, dto.name);
+  });
+
+  it('should be delete article by id', async () => {
+    expect(await mockArticleService.deleteArticle(1)).toEqual({
+      id: 1,
+      ...dto,
+    });
+    expect(mockArticleService.deleteArticle).toHaveBeenCalledWith(1);
+  });
 });
-
-// describe('getArticles', function () {
-//   let articleService: ArticlesService;
-//   it('calls articleService.getArticle', async function () {
-//     expect(articleService.getAllArticle).not.toHaveBeenCalled();
-//     const result = await articleService.getAllArticle();
-//     expect(result).toEqual(result);
-//   });
-// });
-
-// describe('getArticleById', function () {
-//   it('calls articleservice.findOne', async function () {
-//     const mockArticle = {
-//       id: '1',
-//       title: 'titlul',
-//       context: 'context',
-//     };
-//     mockArticleService.findOne.mockReturnValue({});
-//   });
-// });
