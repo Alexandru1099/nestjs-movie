@@ -23,21 +23,20 @@ const mockArticleService = {
 };
 
 describe('ArticleService', function () {
-  
   let articleService: ArticlesService;
   beforeEach(async function () {
     const module = Test.createTestingModule({
       providers: [
         ArticlesService,
         {
-          provide: ArticlesService,
-          useValue:{
+          provide: getRepositoryToken(ArticlesService),
+          useValue: {
             createArticle: jest.fn(() => mockArticleService.createArticles),
           },
         },
       ],
     }).compile();
-    articleService =  (await module).get(ArticlesService);
+    articleService = (await module).get(ArticlesService);
   });
   it('should be defined', () => {
     expect(articleService).toBeDefined();
