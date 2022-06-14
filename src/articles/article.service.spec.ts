@@ -1,3 +1,4 @@
+import { ModuleRef } from '@nestjs/core';
 import { Test } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Article } from './article.entity';
@@ -9,34 +10,34 @@ const dto = {
   context: 'context',
   userId: '03d63156-0b36-4002-b198-1ecd83f4e432',
 };
+const mockArticleService = {
+  createArticles: jest.fn().mockResolvedValue({
+    id: 'alex are mere',
+    ...dto,
+  }),
+  // save: jest
+  //   .fn()
+  //   .mockImplementation((article) => Promise.resolve({ id: 1, ...article })),
+  // getAllArticle: jest.fn(),
+  // findOne: jest.fn(),
+};
 
 describe('ArticleService', function () {
-  const mockArticleService = {
-    createArticles: jest.fn().mockResolvedValue({
-      id: 'alex are mere',
-      ...dto,
-    }),
-    // save: jest
-    //   .fn()
-    //   .mockImplementation((article) => Promise.resolve({ id: 1, ...article })),
-    // getAllArticle: jest.fn(),
-    // findOne: jest.fn(),
-  };
+  
   let articleService: ArticlesService;
   beforeEach(async function () {
     const module = Test.createTestingModule({
       providers: [
         ArticlesService,
         {
-          provide: getRepositoryToken(Article),
-          useFactory: () => ({
-            createArticle: jest.fn(),
-          }),
-          useValue: mockArticleService,
+          provide: getRepositoryToken(ArticlesService),
+          useValue:{
+            createArticle: jest.fn(() => mockArticleService.createArticles),
+          },
         },
       ],
     }).compile();
-    articleService = (await module).get(ArticlesService);
+    articleService =  (await module).get(ArticlesService);
   });
   it('should be defined', () => {
     expect(articleService).toBeDefined();
