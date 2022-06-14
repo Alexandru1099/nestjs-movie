@@ -30,7 +30,7 @@ describe('ArticleService', function () {
       providers: [
         ArticlesService,
         {
-          provide: getRepositoryToken(ArticlesService),
+          provide: ArticlesService,
           useValue:{
             createArticle: jest.fn(() => mockArticleService.createArticles),
           },
