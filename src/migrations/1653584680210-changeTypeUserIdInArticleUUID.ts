@@ -6,7 +6,7 @@ export class changeTypeUserIdInArticleUUID1653584680210
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
             ALTER TABLE article
-            ALTER COLUMN user_id TYPE uuid USING user_id::uuid
+            ALTER COLUMN user_id TYPE uuid USING user_id::uuid;
                                          `);
   }
 

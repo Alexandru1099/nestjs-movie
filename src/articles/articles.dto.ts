@@ -19,4 +19,8 @@ export class CreateArticlesDto {
   @IsString()
   @IsNotEmpty()
   public userId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public photo: string;
 }
