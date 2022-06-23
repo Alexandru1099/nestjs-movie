@@ -30,6 +30,9 @@ export class Article extends BaseEntity {
   @UpdateDateColumn({ type: 'timestamp' })
   public updatedAt: Date;
 
+  @Column({ type: 'varchar' })
+  public photo: string;
+
   @JoinColumn({ name: 'user_id' })
   @ManyToOne((_type) => Users, (users) => users.article, { eager: false })
   user: Partial<Users>;

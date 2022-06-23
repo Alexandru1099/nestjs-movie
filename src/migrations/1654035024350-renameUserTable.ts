@@ -1,14 +1,14 @@
-// import { MigrationInterface, QueryRunner } from 'typeorm';
+import { MigrationInterface, QueryRunner } from 'typeorm';
 
-// export class renameUserTable1654035024350 implements MigrationInterface {
-//   public async up(queryRunner: QueryRunner): Promise<void> {
-//     await queryRunner.query(`
-//         ALTER TABLE "users"
-//         RENAME TO "users";
-//                                                  `);
-//   }
+export class renameUserTable1654035024350 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`
+        ALTER TABLE "user"
+        RENAME TO "users";
+                                                 `);
+  }
 
-//   public async down(queryRunner: QueryRunner): Promise<void> {
-//     await queryRunner.query(`DROP TABLE users`);
-//   }
-// }
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`DROP TABLE users`);
+  }
+}

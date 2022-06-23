@@ -36,7 +36,7 @@ export class ArticlesService {
     // return this.connection.query(
     //   'SELECT * FROM article art INNER JOIN users usr ON art.user_id = usr.id INNER JOIN role rl ON rl.id = usr.rol_id; ',
     // );
-    return this.connection.query('SELECT * FROM article ;');
+    return this.connection.query('SELECT * FROM article');
   }
 
   async getArticle(id: number): Promise<Article> {
