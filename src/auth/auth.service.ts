@@ -23,7 +23,6 @@ export class AuthService {
 
   async signIn(body: authCredentialDto): Promise<{ accessToken: string }> {
     const { email, password } = body;
-    console.log('ceva')
     const user = await this.userRepository.getUserByEmail(email);
     if (user && password === user.password) {
       const payload: jwtPayload = { email };

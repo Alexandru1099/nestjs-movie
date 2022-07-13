@@ -17,7 +17,7 @@ export class ArticlesController {
   constructor(private articleService: ArticlesService) {}
 
   @Get(':id')
-  async getArticle(@Param('id', ParseIntPipe) id: number): Promise<Article> {
+  async getArticle(@Param('id') id: number): Promise<Article> {
     return this.articleService.getArticle(id);
   }
 
