@@ -28,9 +28,8 @@ export class UserService {
   }
 
   async createUser(body: CreateUserDto): Promise<Users> {
-    const name = 'alex';
     return this.userRepository.save({
-      name,
+      name: body.name,
       email: body.email,
       password: body.password,
       age: body.age,

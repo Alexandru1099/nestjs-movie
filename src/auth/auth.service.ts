@@ -17,17 +17,17 @@ export class AuthService {
     private userRepository: UserService,
     private jwtService: JwtService,
   ) {}
-
   async signUp(body: authCredentialDto): Promise<any> {
     return this.userRepository.createUser(body);
   }
 
   async signIn(body: authCredentialDto): Promise<{ accessToken: string }> {
     const { email, password } = body;
+    console.log('ceva')
     const user = await this.userRepository.getUserByEmail(email);
     if (user && password === user.password) {
       const payload: jwtPayload = { email };
-      const accessToken: string = await this.jwtService.sign(payload);
+      const accessToken: string = this.jwtService.sign(payload);
       return { accessToken };
     } else {
       throw new UnauthorizedException('Please check your login');

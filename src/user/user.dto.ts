@@ -9,6 +9,10 @@ import {
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
+  public name: string;
+
+  @IsString()
+  @IsNotEmpty()
   @IsEmail()
   @MaxLength(20, { message: 'password is too long' })
   @MinLength(4, { message: 'password is too short' })
