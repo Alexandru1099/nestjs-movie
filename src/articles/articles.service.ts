@@ -3,6 +3,7 @@ import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { CreateArticlesDto } from './articles.dto';
 import { Article } from './article.entity';
 import { Connection, Repository } from 'typeorm';
+import { Like } from "typeorm";
 
 @Injectable()
 export class ArticlesService {
@@ -11,7 +12,7 @@ export class ArticlesService {
     private readonly connection: Connection,
     @InjectRepository(Article)
     private articleRepository: Repository<Article>,
-  ) {}
+  ) { }
 
   async createArticles(body: CreateArticlesDto): Promise<Article> {
     return this.articleRepository.save({
@@ -47,11 +48,15 @@ export class ArticlesService {
     return found;
   }
 
+  async getArticlesByName(name: string): Promise<Article> {
+    return this.articleRepository.find({ name: Like(`%${name}%`) });
+  }
+
   async deleteArticle(id: number): Promise<void> {
     const result = await this.articleRepository.delete(id);
 
     if (result.affected === 0) {
-      throw new NotFoundException(`Aticle with id "${id}" not found`);
+      throw new NotFoundException(`Movie with id "${id}" not found`);
     }
   }
 
