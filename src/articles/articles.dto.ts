@@ -23,4 +23,20 @@ export class CreateArticlesDto {
   @IsString()
   @IsNotEmpty()
   public photo: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public starring: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public content: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public runtime: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public release: string;
 }

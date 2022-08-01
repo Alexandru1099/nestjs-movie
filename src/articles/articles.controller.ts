@@ -27,7 +27,7 @@ export class ArticlesController {
   }
 
   @Get()
-  async getArticlesByName(@Param('name') name: string): Promise<Article> {
+  async getArticlesByName(@Param('name') name: string): Promise<Article[]> {
     return this.articleService.getArticlesByName(name);
   }
 

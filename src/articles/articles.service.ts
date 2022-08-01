@@ -3,7 +3,7 @@ import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { CreateArticlesDto } from './articles.dto';
 import { Article } from './article.entity';
 import { Connection, Repository } from 'typeorm';
-import { Like } from "typeorm";
+import { Like } from 'typeorm';
 
 @Injectable()
 export class ArticlesService {
@@ -12,7 +12,7 @@ export class ArticlesService {
     private readonly connection: Connection,
     @InjectRepository(Article)
     private articleRepository: Repository<Article>,
-  ) { }
+  ) {}
 
   async createArticles(body: CreateArticlesDto): Promise<Article> {
     return this.articleRepository.save({
@@ -23,6 +23,10 @@ export class ArticlesService {
         id: body.userId,
       },
       photo: body.photo,
+      runtime: body.runtime,
+      release: body.release,
+      starring: body.starring,
+      content: body.content,
     } as any);
   }
   async getAllArticle() {
@@ -48,7 +52,7 @@ export class ArticlesService {
     return found;
   }
 
-  async getArticlesByName(name: string): Promise<Article> {
+  async getArticlesByName(name: string): Promise<Article[]> {
     return this.articleRepository.find({ name: Like(`%${name}%`) });
   }
 
