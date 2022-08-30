@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Article extends BaseEntity {
+export class Movie extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id: string;
 

@@ -1,4 +1,4 @@
-import { Article } from '../articles/article.entity';
+import { Movie } from '../movies/movie.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -35,6 +35,6 @@ export class Users extends BaseEntity {
   @Column({ type: 'varchar' })
   public age: string;
 
-  @OneToMany((_type) => Article, (article) => article.user, { eager: true })
-  article: Article[];
+  @OneToMany((_type) => Movie, (movie) => movie.user, { eager: true })
+  article: Movie[];
 }

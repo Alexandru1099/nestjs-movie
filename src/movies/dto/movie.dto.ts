@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class CreateArticlesDto {
+export class CreateMoviesDto {
   @IsString()
   @IsNotEmpty()
   public name: string;
