@@ -25,7 +25,7 @@ export class MoviesController {
 
   @Get()
   async getMovies(@Query() filterDto: GetMovieFilterDto): Promise<Movie[]> {
-    if (Object.keys(filterDto).length){
+    if (Object.keys(filterDto).length) {
       return this.movieService.getMovieWithFilters(filterDto);
     } else {
       return this.movieService.getAllMovies();
