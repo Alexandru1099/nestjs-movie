@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { CreateMoviesDto } from './dto/movie.dto';
 import { Movie } from './movie.entity';
@@ -6,6 +6,7 @@ import { Connection, Repository } from 'typeorm';
 import { Like } from 'typeorm';
 import { GetMovieFilterDto } from './dto/get-movie-filters.dto';
 import { from, Observable, takeLast } from 'rxjs';
+import { Http2ServerResponse } from 'http2';
 
 @Injectable()
 export class MovieService {
@@ -56,6 +57,9 @@ export class MovieService {
         }
         return false;
       })
+    }
+    if (movie === undefined) {
+      throw new HttpException('No movies', 200);
     }
     return movie;
   }
