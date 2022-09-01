@@ -3,10 +3,6 @@ import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
 export class CreateMoviesDto {
   @IsString()
   @IsNotEmpty()
-  public name: string;
-
-  @IsString()
-  @IsNotEmpty()
   @MinLength(4, { message: 'title is too short' })
   @MaxLength(30, { message: 'password is too long' })
   public title: string;
@@ -39,4 +35,8 @@ export class CreateMoviesDto {
   @IsString()
   @IsNotEmpty()
   public release: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public user_id: string;
 }

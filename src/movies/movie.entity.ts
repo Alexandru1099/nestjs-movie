@@ -16,9 +16,6 @@ export class Movie extends BaseEntity {
   public id: string;
 
   @Column({ type: 'varchar' })
-  public name: string;
-
-  @Column({ type: 'varchar' })
   public title: string;
 
   @Column({ type: 'varchar' })
@@ -46,6 +43,6 @@ export class Movie extends BaseEntity {
   public content: string;
 
   @JoinColumn({ name: 'user_id' })
-  @ManyToOne((_type) => Users, (users) => users.article, { eager: false })
+  @ManyToOne((_type) => Users, (users) => users.movie, { eager: false })
   user: Partial<Users>;
 }

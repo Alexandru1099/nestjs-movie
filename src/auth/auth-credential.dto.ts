@@ -4,4 +4,5 @@ export class authCredentialDto {
   password: string;
   age: string;
   gender: string;
+  rol_id: string;
 }

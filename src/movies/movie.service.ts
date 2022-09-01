@@ -1,4 +1,9 @@
-import { BadRequestException, HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { CreateMoviesDto } from './dto/movie.dto';
 import { Movie } from './movie.entity';
@@ -15,15 +20,14 @@ export class MovieService {
     private readonly connection: Connection,
     @InjectRepository(Movie)
     private movieRepository: Repository<Movie>,
-  ) { }
+  ) {}
 
   async createMovies(body: CreateMoviesDto): Promise<Movie> {
     return this.movieRepository.save({
-      name: body.name,
       title: body.title,
       context: body.context,
       user: {
-        id: body.userId,
+        id: body.user_id,
       },
       photo: body.photo,
       runtime: body.runtime,
@@ -56,7 +60,7 @@ export class MovieService {
           return true;
         }
         return false;
-      })
+      });
     }
     if (movie === undefined) {
       throw new HttpException('No movies', 200);
@@ -72,10 +76,6 @@ export class MovieService {
     return found;
   }
 
-  async getMoviesByName(name: string): Promise<Movie[]> {
-    return this.movieRepository.find({ name: Like(`%${name}%`) });
-  }
-
   async deleteMovie(id: number): Promise<void> {
     const result = await this.movieRepository.delete(id);
 
@@ -84,9 +84,9 @@ export class MovieService {
     }
   }
 
-  async updateMovie(id: number, name: string): Promise<Movie> {
+  async updateMovie(id: number, title: string): Promise<Movie> {
     const movie = await this.getMovie(id);
-    movie.name = name;
+    movie.title = title;
     await this.movieRepository.save(movie);
     return movie;
   }

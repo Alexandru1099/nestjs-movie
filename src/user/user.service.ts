@@ -34,7 +34,10 @@ export class UserService {
       password: body.password,
       age: body.age,
       gender: body.gender,
-    });
+      role: {
+        id: body.rol_id,
+      },
+    } as any);
   }
 
   async deleteUser(id: number): Promise<void> {
