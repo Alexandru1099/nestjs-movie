@@ -35,7 +35,7 @@ export class UserService {
       age: body.age,
       gender: body.gender,
       role: {
-        id: body.rol_id,
+        id: 'a9e82e76-bf84-4650-a078-8157ced389b9',
       },
     } as any);
   }

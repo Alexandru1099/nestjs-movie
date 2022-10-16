@@ -8,6 +8,6 @@ export class foreignKeyUserRole1661963916387 implements MigrationInterface {
                                                `);
   }
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`DROP CONSTRAINT fk_user_rol`);
+    await queryRunner.query(`DROP CONSTRAINT fk_users_role`);
   }
 }
