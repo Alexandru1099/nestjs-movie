@@ -9,6 +9,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { title } from 'process';
 import { GetMovieFilterDto } from './dto/get-movie-filters.dto';
 import { CreateMoviesDto } from './dto/movie.dto';
 import { Movie } from './movie.entity';
@@ -25,17 +26,11 @@ export class MoviesController {
 
   @Get()
   async getMovies(@Query() filterDto: GetMovieFilterDto): Promise<Movie[]> {
-    console.log(Object.keys(filterDto).length);
-    if (Object.keys(filterDto).length){
+    if (Object.keys(filterDto).length) {
       return this.movieService.getMovieWithFilters(filterDto);
     } else {
       return this.movieService.getAllMovies();
     }
-  }
-
-  @Get()
-  async getMoviessByName(@Param('name') name: string): Promise<Movie[]> {
-    return this.movieService.getMoviesByName(name);
   }
 
   @Post()
@@ -48,11 +43,11 @@ export class MoviesController {
     return this.movieService.deleteMovie(id);
   }
 
-  @Patch(':id/name')
+  @Patch(':id/title')
   async updateMovie(
     @Param('id') id: number,
-    @Body('name') name: string,
+    @Body('title') title: string,
   ): Promise<Movie> {
-    return this.movieService.updateMovie(id, name);
+    return this.movieService.updateMovie(id, title);
   }
 }

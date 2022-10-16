@@ -7,7 +7,10 @@ import {
   UpdateDateColumn,
   BaseEntity,
   OneToMany,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
+import { Role } from 'src/roles/roles.entity';
 
 @Entity()
 export class Users extends BaseEntity {
@@ -36,5 +39,9 @@ export class Users extends BaseEntity {
   public age: string;
 
   @OneToMany((_type) => Movie, (movie) => movie.user, { eager: true })
-  article: Movie[];
+  movie: Movie[];
+
+  @JoinColumn({ name: 'rol_id' })
+  @ManyToOne((_type) => Role, (role) => role.users, { eager: false })
+  role: Partial<Role>;
 }

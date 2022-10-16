@@ -33,4 +33,8 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   public gender: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public rol_id: string;
 }

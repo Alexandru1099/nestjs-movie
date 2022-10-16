@@ -18,10 +18,4 @@ export class AuthController {
   ): Promise<{ accessToken: string }> {
     return await this.authService.signIn(body);
   }
-
-  // @Post('test')
-  // @UseGuards(AuthGuard())
-  // test(@Req() req){
-  //   console.log(req)
-  // }
 }

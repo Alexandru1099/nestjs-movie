@@ -1,3 +1,4 @@
+import { Users } from 'src/user/user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -20,4 +22,7 @@ export class Role extends BaseEntity {
 
   @UpdateDateColumn({ type: 'timestamp' })
   public updatedAt!: Date;
+
+  @OneToMany((_type) => Users, (users) => users.role, { eager: true })
+  users: Users[];
 }
